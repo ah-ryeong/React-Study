@@ -58,7 +58,13 @@ const onCreate = () => {
   });
 
   nextId.current += 1;
-}
+};
+
+// users에 filter를 걸어서 각 유저를 확인해서 user.id가 파라미터가 가져온거랑 불일치 한 것만 가져온다
+// 배열 삭제
+const onRemove = id => {
+  setUsers(users.filter(user => user.id !== id));
+};
 
 
   return (
@@ -69,7 +75,7 @@ const onCreate = () => {
         onChange={onChange}
         onCreate={onCreate}
       />
-      <UserList users={users} />
+      <UserList users={users} onRemove={onRemove} />
     </>
   );
 }
