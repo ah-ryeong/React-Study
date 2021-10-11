@@ -1,6 +1,15 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useMemo} from 'react';
 import CreateUser from './CreateUser';
 import UserList from './UserList'
+
+// useMemo : 특정 값이 바뀌었을 때만 특정 함수를 실행해서 연산하도록 처리하고
+// 원하는 값이 변하지 않았다면 리렌더링할때 이전에 사용하던거 재사용
+
+function countActiveUsers(users) {
+  console.log('활성 사용자 수를 세는중...');
+  // 초록색으로 된 유저의 수를 연산해서 가져옴
+  return users.filter(user => user.active).length;
+}
 
 function App() {
   const [inputs, setInputs] = useState({
@@ -80,6 +89,9 @@ const onToggle = id => {
   ));
 };
 
+// 이 함수는 users가 바뀔 때에만 동작
+const count = useMemo(() =>countActiveUsers(users), [users]);
+
   return (
     <>
       <CreateUser 
@@ -89,6 +101,7 @@ const onToggle = id => {
         onCreate={onCreate}
       />
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+      <div>활성 사용자 수 : {count}</div>
     </>
   );
 }

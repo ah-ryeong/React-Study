@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 
 // useEffect : 컴포넌트가 처음 화면에 나타나고 사라질 때 특정 작업을 할 수 있음
+// useMemo : 성능을 최적화 하는 상황에서 사용한다.
 
 // 새로운 컴포넌트 만들기 , 한 파일에 두개의 컴포넌트를 만들어도 상관X
 function User({user, onRemove, onToggle}) {
