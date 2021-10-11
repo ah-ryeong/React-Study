@@ -19,21 +19,25 @@ function App() {
     });
   };
 
+  // 항목 수정하기 -> active값 추가
   const [users, setUsers] = useState([
     {
         id : 1,
         username : 'winter',
-        email : 'winter@example.com'
+        email : 'winter@example.com',
+        active : true,
     },
     {
         id : 2,
         username : 'tester',
-        email : 'tester@example.com'
+        email : 'tester@example.com',
+        active : false,
     },
     {
         id : 3,
         username : 'tester2',
-        email : 'tester2@example.com'
+        email : 'tester2@example.com',
+        active : false,
     }
 ]);
 
@@ -66,6 +70,15 @@ const onRemove = id => {
   setUsers(users.filter(user => user.id !== id));
 };
 
+const onToggle = id => {
+  // id 값을 파라미터로 가져와서 불변성을 지키면서 배열 업데이트 할 때에도 map을 사용할 수 있음
+  // id가 일치한다면 업데이트 일치하지 않으면 없데이트X
+  setUsers(users.map(
+    user => user.id === id 
+      ? {...user, active: !user.active}
+      : user
+  ));
+};
 
   return (
     <>
@@ -75,7 +88,7 @@ const onRemove = id => {
         onChange={onChange}
         onCreate={onCreate}
       />
-      <UserList users={users} onRemove={onRemove} />
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
     </>
   );
 }
