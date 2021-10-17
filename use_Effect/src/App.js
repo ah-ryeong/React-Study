@@ -65,7 +65,7 @@ const onCreate = useCallback(() => {
     email,
   };
 
-  setUsers(users.concat(user));
+  setUsers(users => users.concat(user));
 
   // 클릭할 때, 인풋에 있는 값 지우기
   setInputs({
@@ -74,23 +74,23 @@ const onCreate = useCallback(() => {
   });
 
   nextId.current += 1;
-}, [username, email, users]);
+}, [username, email]);
 
 // users에 filter를 걸어서 각 유저를 확인해서 user.id가 파라미터가 가져온거랑 불일치 한 것만 가져온다
 // 배열 삭제
 const onRemove = useCallback(id => {
-  setUsers(users.filter(user => user.id !== id));
-}, [users]);
+  setUsers(users =>users.filter(user => user.id !== id));
+}, []);
 
 const onToggle = useCallback(id => {
   // id 값을 파라미터로 가져와서 불변성을 지키면서 배열 업데이트 할 때에도 map을 사용할 수 있음
   // id가 일치한다면 업데이트 일치하지 않으면 없데이트X
-  setUsers(users.map(
+  setUsers(users => users.map(
     user => user.id === id 
       ? {...user, active: !user.active}
       : user
   ));
-}, [users]);
+}, []);
 
 // 이 함수는 users가 바뀔 때에만 동작
 const count = useMemo(() =>countActiveUsers(users), [users]);

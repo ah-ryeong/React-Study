@@ -4,7 +4,7 @@ import React, {useEffect} from 'react';
 // useMemo : 성능을 최적화 하는 상황에서 사용한다.
 
 // 새로운 컴포넌트 만들기 , 한 파일에 두개의 컴포넌트를 만들어도 상관X
-function User({user, onRemove, onToggle}) {
+const User = React.memo(function User({user, onRemove, onToggle}) {
     const { username, email, id, active } = user;
     // 빈배열이 있을 때
     // useEffect(() => {
@@ -47,7 +47,7 @@ function User({user, onRemove, onToggle}) {
             </div>
         </div>
     );
-}
+});
 
 // 배열 렌더링 하기 
 // 배열 항목 제거하기 -> onRemove 추가
@@ -70,4 +70,8 @@ function UserList({users, onRemove, onToggle}) {
     );
 }
 
-export default UserList;
+// Memo -> 성능 최적화
+export default React.memo(
+    UserList, 
+    (prevProps, nextProps) => nextProps.users === prevProps.users
+);
