@@ -6,10 +6,10 @@ function User({user}) {
     return (
         <div>
             <div>
-                <b>ID</b> : {User.id}
+                <b>ID</b> : {user.id}
             </div>
             <div>
-                <b>Username</b> : {User.username}
+                <b>Username</b> : {user.username}
             </div>
         </div>
     );

@@ -1,3 +1,4 @@
+import React from 'react';
 import ErrorBoundary from './ErrorBoundary';
 import User from './User';
 
